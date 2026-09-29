@@ -1,0 +1,91 @@
+.sheet-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background: rgb(0 0 0 / 55%);
+}
+
+.sheet {
+    width: min(100%, 480px);
+    max-height: 72dvh;
+    display: flex;
+    flex-direction: column;
+    border-radius: 18px 18px 0 0;
+    color: #f3f3f4;
+    background: #1c1d1f;
+    animation: sheet-up 200ms ease-out;
+}
+@keyframes sheet-up { from { transform: translateY(100%); } to { transform: none; } }
+
+.sheet-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-bottom: 1px solid #303235;
+}
+.sheet-head h2 { font-size: 16px; }
+.sheet-close, .comment-delete {
+    display: grid;
+    place-items: center;
+    border: 0;
+    background: none;
+    color: #b3b5b8;
+    cursor: pointer;
+}
+.sheet-close:hover, .comment-delete:hover { color: #fff; }
+
+.sheet-list { flex: 1; min-height: 120px; overflow-y: auto; list-style: none; padding: 8px 16px; }
+.sheet-note { padding: 28px 0; text-align: center; color: #85888d; font-size: 14px; }
+
+.comment { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; }
+.comment-avatar {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    color: #fff;
+    background: #ff6a2b;
+    font-size: 14px;
+    font-weight: 800;
+}
+.comment-body { flex: 1; min-width: 0; }
+.comment-meta { color: #85888d; font-size: 12px; }
+.comment-meta strong { color: #d5d6d8; }
+.comment-text { margin-top: 2px; font-size: 14px; line-height: 1.4; overflow-wrap: anywhere; }
+
+.sheet-error { padding: 0 16px 6px; color: #ff8a4d; font-size: 13px; font-weight: 600; }
+
+.sheet-form {
+    display: flex;
+    gap: 10px;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+    border-top: 1px solid #303235;
+}
+.sheet-form input {
+    flex: 1;
+    padding: 11px 14px;
+    border: 1px solid #414448;
+    border-radius: 999px;
+    color: #fff;
+    background: #111;
+    font: inherit;
+    font-size: 14px;
+}
+.sheet-form input:focus { outline: 2px solid #ff6a2b; }
+.sheet-form button {
+    padding: 0 18px;
+    border: 0;
+    border-radius: 999px;
+    color: #fff;
+    background: #ff6a2b;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+.sheet-form button:disabled { opacity: 0.45; cursor: not-allowed; }

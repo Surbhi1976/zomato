@@ -1,0 +1,496 @@
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: var(--text-primary);
+    background: var(--page-background);
+}
+
+.auth-header {
+    width: min(100% - 48px, 1120px);
+    min-height: 84px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.wordmark {
+    color: var(--text-primary);
+    font-size: 29px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    text-decoration: none;
+}
+
+.wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.wordmark-accent {
+    color: var(--accent);
+}
+
+.audience-switch {
+    display: flex;
+    gap: 6px;
+    padding: 4px;
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    background: var(--surface-muted);
+}
+
+.audience-switch a {
+    padding: 8px 12px;
+    border-radius: 5px;
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 160ms ease, color 160ms ease;
+}
+
+.audience-switch a:hover,
+.audience-switch a.is-active {
+    color: var(--text-primary);
+    background: var(--surface);
+}
+
+.auth-content {
+    width: min(100% - 40px, 420px);
+    margin: auto;
+    padding: 64px 0;
+}
+
+.partner-register-page {
+    /* This page has a light background, so it always uses the light palette.
+       Without this, dark-mode users got near-white text on white inputs. */
+    color-scheme: light;
+    --page-background: #f8f7f4;
+    --surface: #fff;
+    --surface-muted: #f5f5f5;
+    --text-primary: #111;
+    --text-secondary: #55585d;
+    --text-tertiary: #8a8d92;
+    --border-subtle: #ececee;
+    --border-strong: #d9dadd;
+    --accent: #ff6a2b;
+    --accent-hover: #e5561a;
+    --accent-soft: rgb(255 106 43 / 14%);
+    --button-text: #fff;
+    background: #f8f7f4;
+}
+
+.partner-register-page .auth-content {
+    width: min(100% - 40px, 1040px);
+    display: grid;
+    grid-template-columns: minmax(260px, 0.78fr) minmax(380px, 1fr);
+    align-items: center;
+    gap: clamp(56px, 9vw, 132px);
+    padding: 58px 0 72px;
+}
+
+.partner-panel {
+    position: relative;
+    min-height: 480px;
+    padding: 42px 38px;
+    overflow: hidden;
+    border-radius: 18px;
+    color: #fff;
+    background: #252525;
+    box-shadow: 18px 18px 0 #e9d9cf;
+}
+
+.partner-panel::after {
+    content: '';
+    position: absolute;
+    right: -72px;
+    bottom: -88px;
+    width: 230px;
+    height: 230px;
+    border: 1px solid rgb(255 255 255 / 22%);
+    border-radius: 50%;
+    box-shadow: 0 0 0 28px rgb(255 255 255 / 4%), 0 0 0 56px rgb(255 255 255 / 4%);
+}
+
+.partner-mark {
+    display: inline-block;
+    margin-bottom: 72px;
+    color: #fff;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -1.8px;
+}
+
+.partner-mark span {
+    color: #ff8a4d;
+}
+
+.partner-panel-label {
+    margin-bottom: 14px;
+    color: #ff8a4d;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.partner-panel h2 {
+    max-width: 285px;
+    font-size: clamp(30px, 3vw, 43px);
+    line-height: 1.08;
+    letter-spacing: -1px;
+}
+
+.partner-panel > p:not(.partner-panel-label) {
+    max-width: 290px;
+    margin-top: 20px;
+    color: #c6c5c3;
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+.partner-panel-note {
+    position: absolute;
+    right: 38px;
+    bottom: 38px;
+    left: 38px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #dddcd9;
+    font-size: 12px;
+}
+
+.partner-panel-dot {
+    width: 8px;
+    height: 8px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: #ff8a4d;
+    box-shadow: 0 0 0 5px rgb(255 138 77 / 18%);
+}
+
+.partner-register-page .auth-intro {
+    margin-bottom: 28px;
+}
+
+.partner-register-page .auth-intro h1 {
+    font-size: 36px;
+    letter-spacing: -0.8px;
+}
+
+.partner-register-page .auth-form {
+    gap: 15px;
+}
+
+.partner-register-page .form-field {
+    gap: 7px;
+}
+
+.partner-field-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.partner-register-page .form-field input,
+.partner-register-page .form-field textarea {
+    border-color: #d7d2cc;
+    border-radius: 9px;
+    color: #111;
+    -webkit-text-fill-color: #111; /* keeps typed / autofilled text black */
+    background: #fff;
+}
+
+.partner-register-page .form-field input::placeholder,
+.partner-register-page .form-field textarea::placeholder {
+    color: #8a8d92;
+    -webkit-text-fill-color: #8a8d92;
+}
+
+.form-field textarea {
+    width: 100%;
+    min-height: 78px;
+    padding: 12px 13px;
+    resize: vertical;
+    outline: none;
+    color: var(--text-primary);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.45;
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.form-field textarea::placeholder {
+    color: var(--text-tertiary);
+}
+
+.form-field textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.partner-register-page .submit-button {
+    min-height: 52px;
+    margin-top: 6px;
+    border-radius: 9px;
+}
+
+.auth-intro {
+    margin-bottom: 32px;
+}
+
+.eyebrow {
+    margin-bottom: 12px;
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.auth-intro h1 {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.auth-description {
+    margin-top: 10px;
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.auth-form {
+    display: grid;
+    gap: 18px;
+}
+
+.form-field {
+    display: grid;
+    gap: 8px;
+    color: var(--text-primary);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.form-field input {
+    width: 100%;
+    min-height: 46px;
+    padding: 0 13px;
+    border: 1px solid var(--border-strong);
+    border-radius: 6px;
+    outline: none;
+    color: var(--text-primary);
+    background: var(--surface);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 400;
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.form-field input::placeholder {
+    color: var(--text-tertiary);
+}
+
+.form-field input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.form-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: -2px;
+    font-size: 13px;
+}
+
+.remember-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.remember-option input {
+    width: 15px;
+    height: 15px;
+    accent-color: var(--accent);
+}
+
+.text-button {
+    padding: 0;
+    border: 0;
+    color: var(--accent);
+    background: none;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.submit-button {
+    min-height: 48px;
+    margin-top: 2px;
+    border: 0;
+    border-radius: 6px;
+    color: var(--button-text);
+    background: var(--accent);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 160ms ease, transform 160ms ease;
+}
+
+.submit-button:hover {
+    background: var(--accent-hover);
+}
+
+.submit-button:active {
+    transform: translateY(1px);
+}
+
+.switch-prompt {
+    margin-top: 2px;
+    color: var(--text-secondary);
+    font-size: 13px;
+    text-align: center;
+}
+
+.switch-prompt a {
+    color: var(--accent);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.switch-prompt a:hover,
+.text-button:hover {
+    text-decoration: underline;
+}
+
+.auth-footer {
+    padding: 22px 24px;
+    color: var(--text-tertiary);
+    font-size: 12px;
+    text-align: center;
+}
+
+@media (max-width: 520px) {
+    .auth-header {
+        width: calc(100% - 32px);
+        min-height: 72px;
+    }
+
+    .wordmark {
+        font-size: 26px;
+    }
+
+    .audience-switch a {
+        padding: 7px 9px;
+        font-size: 12px;
+    }
+
+    .auth-content {
+        width: calc(100% - 40px);
+        padding: 48px 0;
+    }
+
+    .partner-register-page .auth-content {
+        width: calc(100% - 32px);
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 36px 0 48px;
+    }
+
+    .partner-panel {
+        min-height: 300px;
+        padding: 28px 24px 84px; /* room for the absolutely-positioned note at the bottom */
+        box-shadow: 10px 10px 0 #e9d9cf;
+    }
+
+    .partner-mark {
+        margin-bottom: 36px;
+    }
+
+    .partner-panel h2 {
+        max-width: 250px;
+        font-size: 31px;
+    }
+
+    .partner-panel-note {
+        right: 24px;
+        bottom: 24px;
+        left: 24px;
+    }
+
+    .partner-register-page .auth-intro h1 {
+        font-size: 30px;
+    }
+
+    .partner-field-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
+.auth-error {
+    padding: 10px 12px;
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    color: var(--accent);
+    background: var(--accent-soft);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.submit-button:disabled {
+    opacity: 0.6;
+    cursor: progress;
+}
+
+
+@media (min-width: 521px) {
+    .partner-register-page .auth-content {
+        row-gap: 0;
+    }
+
+    .partner-register-page .partner-panel {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+    }
+
+    .partner-register-page .auth-intro {
+        grid-column: 2;
+        grid-row: 1;
+        align-self: end;
+    }
+
+    .partner-register-page .auth-form {
+        grid-column: 2;
+        grid-row: 2;
+        align-self: start;
+    }
+}
+
+.auth-notice {
+    padding: 10px 12px;
+    border: 1px solid #1a9c55;
+    border-radius: 8px;
+    color: #1a9c55;
+    background: rgb(26 156 85 / 12%);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+a.text-button {
+    text-decoration: none;
+}

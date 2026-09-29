@@ -1,0 +1,27 @@
+.google-block { display: grid; gap: 14px; }
+
+.or-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-tertiary);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+.or-divider::before,
+.or-divider::after { content: ''; flex: 1; height: 1px; background: var(--border-subtle); }
+
+.google-holder {
+    display: flex;
+    justify-content: center;
+    min-height: 44px;
+}
+
+.google-fail {
+    color: var(--text-secondary);
+    font-size: 12.5px;
+    line-height: 1.5;
+    text-align: center;
+}
