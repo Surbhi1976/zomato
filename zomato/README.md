@@ -37,7 +37,7 @@ npm run dev              # http://localhost:3000
 | `GOOGLE_CLIENT_ID` | Google OAuth Client ID (see "Google sign-in setup") |
 | `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `MAIL_FROM` | email account used to send password-reset emails (see "Email setup" below) |
 | `APP_NAME` | name shown in emails, default `Bitereel` |
-| `IMAGEKIT_PUBLIC_KEY` / `IMAGEKIT_PRIVATE_KEY` / `IMAGEKIT_URL_ENDPOINT` | from https://imagekit.io/dashboard/developer/api-keys |
+| `IMAGEKIT_PUBLIC_KEY` / `IMAGEKIT_PRIVATE_KEY` / `IMAGEKIT_URL_ENDPOINT` | from https://imagekit.io/dashboard |
 
 ### 2. Frontend
 ```bash
