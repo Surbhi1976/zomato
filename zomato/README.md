@@ -1,8 +1,32 @@
-# Bitereel: a reels-style food delivery app (MERN)
+# Bitereel: a reels-style food discovery app (MERN)
 
 A food-discovery app with a short-video (reels) feed, inspired by food-delivery apps such as Zomato.
-Customers scroll food videos, like and save them, and visit the restaurant.
-Food partners upload dish videos (stored on ImageKit).
+Customers scroll through food videos, like and save them, comment, and visit the restaurant's store page.
+Food partners (restaurants) upload dish videos, which are stored on ImageKit.
+
+**Live demo:** https://YOUR-FRONTEND-URL.vercel.app
+**Backend API:** https://YOUR-BACKEND-URL.onrender.com
+
+> The backend runs on a free tier and may take up to a minute to wake up on the first request.
+
+**Demo accounts** (optional, add if you create them)
+
+| Role | Email | Password |
+|---|---|---|
+| Customer | demo-user@example.com | your-demo-password |
+| Food partner | demo-partner@example.com | your-demo-password |
+
+<!-- Add 2-3 screenshots or a short demo GIF here, for example: -->
+<!-- ![Reels feed](docs/feed.png) -->
+
+## Tech stack
+- **Frontend:** React, Vite, React Router, Axios
+- **Backend:** Node.js, Express 5
+- **Database:** MongoDB with Mongoose
+- **Media storage:** ImageKit
+- **Auth:** JWT in httpOnly cookies, bcrypt, Google Sign-In (OAuth ID token)
+- **Email:** Nodemailer (SMTP) for password-reset links
+- **Security:** helmet, express-rate-limit, CORS allow-list
 
 ## Features
 - **Reels feed:** vertical snap-scroll, only the on-screen video plays, tap to pause, mute toggle
@@ -17,23 +41,56 @@ Food partners upload dish videos (stored on ImageKit).
 - **Store page:** partner info, dish grid, total likes
 - **Saved page:** all reels a customer bookmarked
 
-## Setup
+## Project structure
+```
+zomato/
+  backend/    Express API (controllers, models, routes, middlewares, services)
+  frontend/   React app built with Vite
+```
+
+## Running locally
+
+**Prerequisites:** Node.js 18 or newer, and MongoDB (local install or a free MongoDB Atlas cluster).
 
 ### 1. Backend
 ```bash
 cd backend
-cp .env.example .env     # then fill in the values (see below)
 npm install
-npm run dev              # http://localhost:3000
 ```
 
-`.env` values:
+Create a file named `.env` inside the `backend` folder with these values:
+
+```dotenv
+PORT=3000
+NODE_ENV=development
+MONGODB_URI=mongodb://127.0.0.1:27017/food-view
+JWT_SECRET=put-a-long-random-string-here
+CLIENT_URL=http://localhost:5173
+
+GOOGLE_CLIENT_ID=
+
+SMTP_HOST=
+SMTP_PORT=587
+SMTP_USER=
+SMTP_PASS=
+MAIL_FROM="Bitereel <your.address@gmail.com>"
+APP_NAME=Bitereel
+
+IMAGEKIT_PUBLIC_KEY=
+IMAGEKIT_PRIVATE_KEY=
+IMAGEKIT_URL_ENDPOINT=
+```
+
+Then start the server:
+```bash
+npm run dev              # http://localhost:3000
+```
 
 | Key | What it is |
 |---|---|
 | `MONGODB_URI` | e.g. `mongodb://127.0.0.1:27017/food-view` or your Atlas connection string |
 | `JWT_SECRET` | any long random string |
-| `CLIENT_URL` | frontend origin for CORS, default `http://localhost:5173` (comma-separate several) |
+| `CLIENT_URL` | frontend origin for CORS, default `http://localhost:5173` (comma-separate several, no spaces) |
 | `GOOGLE_CLIENT_ID` | Google OAuth Client ID (see "Google sign-in setup") |
 | `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `MAIL_FROM` | email account used to send password-reset emails (see "Email setup" below) |
 | `APP_NAME` | name shown in emails, default `Bitereel` |
@@ -42,8 +99,18 @@ npm run dev              # http://localhost:3000
 ### 2. Frontend
 ```bash
 cd frontend
-cp .env.example .env     # only needed if the backend is not on http://localhost:3000
 npm install
+```
+
+Create a file named `.env` inside the `frontend` folder (only needed if the backend is not on `http://localhost:3000`, or if you use Google sign-in):
+
+```dotenv
+VITE_API_URL=http://localhost:3000
+VITE_GOOGLE_CLIENT_ID=
+```
+
+Then start the app:
+```bash
 npm run dev              # http://localhost:5173
 ```
 
@@ -82,6 +149,9 @@ Use port `465` for implicit TLS or `587` for STARTTLS.
 
 **No SMTP yet?** Leave `SMTP_HOST` empty. The backend then prints the reset email, including the link, in the
 terminal instead of sending it, so you can still try the whole flow locally.
+
+> **Hosting note:** some free hosting tiers (for example Render's free web services) block outbound SMTP ports.
+> If password-reset emails time out after deploying, use a paid instance or switch to an email provider with an HTTP API.
 
 ## How to use
 1. Open `/food-partner/register`, create a restaurant, then upload a dish video.
@@ -127,6 +197,43 @@ terminal instead of sending it, so you can still try the whole flow locally.
 - Rate limiting per IP (15 minutes): 10 failed logins, 20 registrations, 6 reset requests, 10 reset attempts. Tunable with `RATE_LIMIT_*_MAX` env vars.
 - `helmet` security headers, CORS restricted to `CLIENT_URL`, and a `no-referrer` policy so reset tokens in URLs are never leaked to other sites.
 
-## Deploying to production
-Set `NODE_ENV=production` on the backend. Cookies then use `SameSite=None; Secure`, which requires HTTPS.
-Set `CLIENT_URL` to your deployed frontend URL and `VITE_API_URL` to your deployed backend URL.
+## Deployment
+
+Suggested free setup: **MongoDB Atlas** (database), **Render** (backend), **Vercel or Netlify** (frontend).
+
+### 1. Database (MongoDB Atlas)
+1. Create a free M0 cluster and a database user.
+2. Under *Network Access*, allow access from anywhere (`0.0.0.0/0`).
+3. Copy the connection string and use it as `MONGODB_URI`.
+
+### 2. Backend (Render, Web Service)
+- **Root directory:** `zomato/backend` (or `backend` if your repo root is the project folder)
+- **Build command:** `npm install`
+- **Start command:** `npm start`
+- **Environment variables:** `NODE_ENV=production`, `MONGODB_URI`, `JWT_SECRET`, `CLIENT_URL` (your frontend URL, no trailing slash),
+  `GOOGLE_CLIENT_ID`, `IMAGEKIT_PUBLIC_KEY`, `IMAGEKIT_PRIVATE_KEY`, `IMAGEKIT_URL_ENDPOINT`, plus the email settings
+
+With `NODE_ENV=production`, cookies use `SameSite=None; Secure`, which requires HTTPS.
+
+### 3. Frontend (Vercel or Netlify)
+- **Root directory:** `zomato/frontend` (or `frontend`)
+- **Build command:** `npm run build`, **output directory:** `dist`
+- **Environment variables:** `VITE_API_URL` (your deployed backend URL) and `VITE_GOOGLE_CLIENT_ID`
+- **Single-page-app fallback:** add a rewrite of all routes to `index.html`, otherwise refreshing a page such as `/saved` returns a 404.
+  - Vercel: a `vercel.json` with `{ "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }] }`
+  - Netlify: a `public/_redirects` file containing `/*  /index.html  200`
+
+### 4. After deploying
+- Add the deployed frontend URL to *Authorized JavaScript origins* in Google Cloud Console.
+- Open the live site and test: partner register, video upload, user register, like, save, comment, search, password reset.
+
+### Known deployment notes
+- **Safari / iOS:** because the frontend and backend are on different domains, some browsers treat the login cookie as a third-party cookie
+  and block it. Hosting both under one parent domain (for example `app.example.com` and `api.example.com`) avoids this.
+- **Free-tier cold starts:** a sleeping backend can take up to a minute to answer the first request.
+
+## Roadmap
+- Cart and checkout
+- Online payments (test mode first)
+- Order placement and live order status tracking
+- Paginated feed
