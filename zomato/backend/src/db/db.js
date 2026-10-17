@@ -6,7 +6,8 @@ function connectDB() {
             console.log('Mongodb connected');
         })
         .catch((err) => {
-            console.log('mongodb connection error:', err);
-        });
+    console.log('mongodb connection error:', err);
+    process.exit(1);
+});
 }
 module.exports = connectDB;
