@@ -4,17 +4,16 @@ A food-discovery app with a short-video (reels) feed, inspired by food-delivery 
 Customers scroll through food videos, like and save them, comment, and visit the restaurant's store page.
 Food partners (restaurants) upload dish videos, which are stored on ImageKit.
 
-**Live demo:** https://YOUR-FRONTEND-URL.vercel.app
-**Backend API:** https://YOUR-BACKEND-URL.onrender.com
+**Live demo:** https://bitereel-taupe.vercel.app
+**Backend API:** https://zomato-15lw.onrender.com
 
 > The backend runs on a free tier and may take up to a minute to wake up on the first request.
 
-**Demo accounts** (optional, add if you create them)
+**How to try it**
+1. Open the live demo and create a **food partner** account at `/food-partner/register`, then upload a short dish video.
+2. In another browser or an incognito window, create a **customer** account at `/user/register` and scroll the feed.
 
-| Role | Email | Password |
-|---|---|---|
-| Customer | demo-user@example.com | your-demo-password |
-| Food partner | demo-partner@example.com | your-demo-password |
+The live demo uses email and password sign-up. Google sign-in is built in and is enabled when `VITE_GOOGLE_CLIENT_ID` is set (see "Google sign-in setup").
 
 <!-- Add 2-3 screenshots or a short demo GIF here, for example: -->
 <!-- ![Reels feed](docs/feed.png) -->
